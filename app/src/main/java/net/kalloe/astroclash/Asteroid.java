@@ -23,7 +23,7 @@ public class Asteroid extends GameObject {
 
         speed = 7 + (int) (rand.nextDouble()*score / 30);
 
-        //cap asteroid speed
+        //获取小鸟的速度
         if(speed > 42) {
             speed = 42;
         }
@@ -54,7 +54,7 @@ public class Asteroid extends GameObject {
 
     @Override
     public int getWidth() {
-        //offset slightly more, for realistic cllision detection
+        //偏移宽度一点导弹的碰撞会比较真实
         return (width - 10);
     }
 }

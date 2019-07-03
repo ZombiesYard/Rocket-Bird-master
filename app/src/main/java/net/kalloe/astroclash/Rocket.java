@@ -23,7 +23,6 @@ public class Rocket extends GameObject {
 
         speed = 7 + (int) (rand.nextDouble()*score / 30);
 
-        //cap asteroid speed
         if(speed > 42) {
             speed = 42;
         }
@@ -54,7 +53,6 @@ public class Rocket extends GameObject {
 
     @Override
     public int getWidth() {
-        //offset slightly more, for realistic cllision detection
         return (width - 10);
     }
 }

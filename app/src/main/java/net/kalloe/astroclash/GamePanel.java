@@ -29,11 +29,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private int maxBorderHeight;
     private int minBorderHeight;
     private boolean newGameCreated;
-    //increase to slow down difficulty progression, decrease to speed up difficulty progression
-    private int progressDenom = 20;
+    //增加降低难度，减小增加难度
+    private int progressDenom = 500;
     private int best;
     private SharedPrefManager prefManager;
-//    private Typeface fontDescription, fontTitle;
+
 
     public GamePanel(Context context)
     {
@@ -49,9 +49,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.prefManager = new SharedPrefManager(getContext());
         this.best = prefManager.get(SharedPrefManager.PREF_BEST_SCORE);
 
-        //load fonts
-//        this.fontDescription = Typeface.createFromAsset(getContext().getAssets(), "fonts/korean_caligraphy.ttf");
-//        this.fontTitle = Typeface.createFromAsset(getContext().getAssets(), "fonts/display_gothic.ttf");
+
     }
 
     @Override
@@ -86,7 +84,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         thread = new GameThread(getHolder(), this);
 
 
-        //we can safely start the game loop
+
         thread.setRunning(true);
         thread.start();
 
@@ -124,11 +122,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             player.update();
 
 
-            //add missiles on timer
+
             long missileElapsed = (System.nanoTime()-missileStartTime)/1000000;
             if(missileElapsed >(2000 - player.getScore()/4)){
 
-                //first missile always goes down the middle
+
                 if(rockets.size()==0)
                 {
                     rockets.add(new Rocket(BitmapFactory.decodeResource(getResources(),R.drawable.
@@ -141,7 +139,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                             WIDTH+10, (int)(rand.nextDouble()*(HEIGHT - (maxBorderHeight * 2))+maxBorderHeight),45,15, player.getScore(),13));
                 }
 
-                //reset timer
+
                 missileStartTime = System.nanoTime();
             }
 
@@ -160,10 +158,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 }
             }
 
-            //loop through every missile and check collision and remove
+
             for(int i = 0; i< rockets.size();i++)
             {
-                //update missile
+
                 rockets.get(i).update();
 
                 if(collision(rockets.get(i),player))
@@ -182,7 +180,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                     }
 //                    break;
                 }
-                //remove missile if it is way off the screen
+
                 if(rockets.get(i).getX()<-100)
                 {
                     rockets.remove(i);
@@ -277,13 +275,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             Paint paint1 = new Paint();
             paint1.setTextSize(40);
             paint1.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            canvas.drawText("ROCKET BIRD by 张宇", WIDTH / 2 - 50, HEIGHT / 2, paint1);
+            canvas.drawText("ROCKET BIRD", WIDTH / 2 - 50, HEIGHT / 2, paint1);
 
             Paint paint2 = new Paint();
             paint2.setTextSize(20);
             paint2.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             canvas.drawText("按住屏幕任意一点上升", WIDTH/2-50, HEIGHT/2 + 30, paint2);
             canvas.drawText("松开下落", WIDTH/2-50, HEIGHT/2 + 60, paint2);
+            canvas.drawText("张宇许稚皎组", WIDTH/2-50, HEIGHT/2 + 90, paint2);
+            canvas.drawText("Android Studio课程设计", WIDTH/2-50, HEIGHT/2 + 120, paint2);
         }
     }
 

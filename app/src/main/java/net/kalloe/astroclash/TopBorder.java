@@ -15,7 +15,7 @@ public class TopBorder extends GameObject {
         this.x = x;
         this.y = y;
 
-        //Borders will move at the same speed as the background.
+
         dx = GamePanel.MOVESPEED;
         image = Bitmap.createBitmap(img, 0, 0, width, height);
     }

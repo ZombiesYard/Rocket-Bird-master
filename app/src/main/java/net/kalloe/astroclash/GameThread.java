@@ -31,7 +31,7 @@ public class GameThread extends Thread
             startTime = System.nanoTime();
             canvas = null;
 
-            //try locking the canvas for pixel editing
+
             try {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
